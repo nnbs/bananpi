@@ -1,0 +1,23 @@
+BB_OUTPUT=$(OUTPUT)/busybox
+BB_PARAM=ARCH=arm O=$(BB_OUTPUT) -C $(ROOT)/busybox
+
+mk_busybox_build:
+	$(call USE_CONFIG,busybox,$(BB_OUTPUT)/.config)
+	make $(BB_PARAM) || exit 1;
+
+mk_busybox_config:
+	$(call CHECK_FOLDER,$(BB_OUTPUT))
+	if [ ! -f $(BB_OUTPUT)/.config ]; then \
+	    make $(BB_PARAM) defconfig; \
+	fi
+	make $(BB_PARAM) menuconfig;
+
+mk_busybox_cpcfg:
+	$(call KEEP_CONFIG,busybox,$(BB_OUTPUT)/.config)
+
+mk_busybox_install:
+	$(call CHECK_FOLDER,$(IMAGE)/rootfs)
+	make $(BB_PARAM) CONFIG_PREFIX=$(IMAGE)/rootfs install
+
+mk_busybox_clean:
+	echo $@

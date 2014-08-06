@@ -3,7 +3,7 @@ KERNEL_PARAM=ARCH=arm O=$(KERNEL_OUTPUT) -C $(ROOT)/linux
 
 mk_kernel_build:
 	$(call USE_CONFIG,linux,$(KERNEL_OUTPUT)/.config)
-	make $(KERNEL_PARAM) uImage modules
+	make $(KERNEL_PARAM) uImage modules || exit 1;
 
 mk_kernel_config:
 	$(call CHECK_FOLDER,$(OUTPUT)/kernel)
@@ -18,7 +18,7 @@ mk_kernel_cpcfg:
 mk_kernel_install:
 	$(call CHECK_FOLDER,$(IMAGE)/rootfs)
 	cp -f $(KERNEL_OUTPUT)/arch/arm/boot/uImage $(IMAGE)
-	make $(KERNEL_PARAM) INSTALL_MOD_PATH=$(IMAGE)/rootfs modules_install
+	make $(KERNEL_PARAM) INSTALL_MOD_PATH=$(IMAGE)/rootfs modules_install || exit 1;
 
 mk_kernel_clean:
 	echo $@
