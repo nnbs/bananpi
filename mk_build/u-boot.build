@@ -1,0 +1,15 @@
+mk_u-boot_build:
+	make O=$(OUTPUT)/u-boot -C $(ROOT)/u-boot
+
+mk_u-boot_config:
+	make O=$(OUTPUT)/u-boot Bananapi_config -C $(ROOT)/u-boot
+
+mk_u-boot_cpcfg:
+	echo $@
+
+mk_u-boot_install:
+	$(call CHECK_FOLDER,$(IMAGE))
+	cp -f $(OUTPUT)/u-boot/u-boot-sunxi-with-spl.bin $(IMAGE)/u-boot.bin
+
+mk_u-boot_clean:
+	echo $@
