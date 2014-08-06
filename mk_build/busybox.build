@@ -15,7 +15,7 @@ mk_busybox_config:
 mk_busybox_cpcfg:
 	$(call KEEP_CONFIG,busybox,$(BB_OUTPUT)/.config)
 
-mk_busybox_install:
+mk_busybox_install: mk_busybox_uninstall
 	$(call CHECK_FOLDER,$(IMAGE)/rootfs)
 	make $(BB_PARAM) CONFIG_PREFIX=$(IMAGE)/rootfs install
 

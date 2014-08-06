@@ -15,7 +15,7 @@ mk_kernel_config:
 mk_kernel_cpcfg:
 	$(call KEEP_CONFIG,linux,$(KERNEL_OUTPUT)/.config)
 
-mk_kernel_install:
+mk_kernel_install: mk_kernel_uninstall
 	$(call CHECK_FOLDER,$(IMAGE)/rootfs)
 	cp -f $(KERNEL_OUTPUT)/arch/arm/boot/uImage $(IMAGE)
 	make $(KERNEL_PARAM) INSTALL_MOD_PATH=$(IMAGE)/rootfs modules_install || exit 1;

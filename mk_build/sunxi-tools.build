@@ -8,7 +8,7 @@ mk_sunxi-tools_config:
 mk_sunxi-tools_cpcfg:
 	echo $@
 
-mk_sunxi-tools_install:
+mk_sunxi-tools_install: mk_sunxi-tools_uninstall
 	$(ROOT)/sunxi-tools/fex2bin $(ROOT)/sunxi-boards/sys_config/a20/Bananapi.fex $(IMAGE)/script.bin
 
 mk_sunxi-tools_uninstall:

@@ -2,4 +2,6 @@
 output/*
 image/*
 config/*_config
+source/*
+dropbear/*
 
