@@ -11,6 +11,9 @@ mk_sunxi-tools_cpcfg:
 mk_sunxi-tools_install:
 	$(ROOT)/sunxi-tools/fex2bin $(ROOT)/sunxi-boards/sys_config/a20/Bananapi.fex $(IMAGE)/script.bin
 
+mk_sunxi-tools_uninstall:
+	rm -f $(IMAGE)/script.bin
+
 mk_sunxi-tools_clean:
 	echo $@
 

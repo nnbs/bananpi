@@ -72,5 +72,8 @@ install_apps:
 	@$(call BUILD_WITH_CONFIG,$*,clean) || exit 1;
 
 %.build:
-	$(call BUILD_WITH_CONFIG,$*,build)
+	$(call BUILD_WITH_CONFIG,$*,build) || exit 1;
+
+%.uninstall:
+	$(call BUILD_WITH_CONFIG,$*,uninstall) || exit 1;
 

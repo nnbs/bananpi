@@ -19,5 +19,8 @@ mk_busybox_install:
 	$(call CHECK_FOLDER,$(IMAGE)/rootfs)
 	make $(BB_PARAM) CONFIG_PREFIX=$(IMAGE)/rootfs install
 
+mk_busybox_uninstall:
+	make $(BB_PARAM) CONFIG_PREFIX=$(IMAGE)/rootfs uninstall
+
 mk_busybox_clean:
 	echo $@

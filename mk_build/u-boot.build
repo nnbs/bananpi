@@ -11,5 +11,8 @@ mk_u-boot_install:
 	$(call CHECK_FOLDER,$(IMAGE))
 	cp -f $(OUTPUT)/u-boot/u-boot-sunxi-with-spl.bin $(IMAGE)/u-boot.bin
 
+mk_u-boot_uninstall:
+	rm -f $(IMAGE)/u-boot.bin
+
 mk_u-boot_clean:
 	echo $@

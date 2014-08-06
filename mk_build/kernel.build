@@ -20,5 +20,10 @@ mk_kernel_install:
 	cp -f $(KERNEL_OUTPUT)/arch/arm/boot/uImage $(IMAGE)
 	make $(KERNEL_PARAM) INSTALL_MOD_PATH=$(IMAGE)/rootfs modules_install || exit 1;
 
+mk_kernel_uninstall:
+	rm -f $(IMAGE)/uImage
+	rm -rf $(IMAGE)/rootfs/lib/modules
+	rm -rf $(IMAGE)/rootfs/lib/firmware
+
 mk_kernel_clean:
 	echo $@
