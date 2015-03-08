@@ -10,6 +10,10 @@
 [submodule "linux"]
 	path = linux
 	url = https://github.com/LeMaker/linux-bananapi.git
-[submodule "busybox"]
-	path = busybox
+
+[submodule "Appliction/busybox"]
+	path = Appliction/busybox
+	url = git://busybox.net/busybox.git
+[submodule "Application/busybox"]
+	path = Application/busybox
 	url = git://busybox.net/busybox.git
