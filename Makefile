@@ -11,7 +11,7 @@ clean: clean_image
 	rm -rf $(OUTPUT)
 
 clean_image:
-	rm -rg $(IMAGE)
+	rm -rf $(IMAGE)
 
 view_variable:
 	$(shell make -pn | grep -A1 "^# makefile")
@@ -56,7 +56,6 @@ install_apps:
 	    echo Install $$n; \
 	    make $$n.install || exit 1; \
 	done
-
 
 
 %.config:

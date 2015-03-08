@@ -1,21 +1,18 @@
-DROPBEAR_OUTPUT=$(OUTPUT)/dropbear
-DROPBEAR_SRC=$(ROOT)/dropbear
+PACKAGE_NAME=dropbear
+OUTPUT_FOLDER=$(OUTPUT)/Application/$(PACKAGE_NAME)
+SRC_FOLDER=$(ROOT)/Application/$(PACKAGE_NAME)
+PACKAGE_SERVER=https://matt.ucc.asn.au/dropbear/releases
+PACKAGE_FILENAME=dropbear-2014.64.tar.bz2
 
 mk_dropbear_build:
-	make -C $(DROPBEAR_OUTPUT) || exit 1;
+	make -C $(OUTPUT_FOLDER) || exit 1;
 
 mk_dropbear_config:
-	$(call CHECK_FOLDER,$(DROPBEAR_OUTPUT))
-	$(call CHECK_FOLDER,$(ROOT)/spurce)
-	@if [ ! -f $(ROOT)/source/dropbear-2014.64.tar.bz2 ]; then \
-	    cd source; wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2014.64.tar.bz2; \
-	fi
-	@if [ ! -d $(DROPBEAR_SRC) ]; then \
-	    tar xvjf $(ROOT)/source/dropbear-2014.64.tar.bz2; \
-	    mv dropbear-2014.64 dropbear; \
-	fi
-	cd $(DROPBEAR_OUTPUT); \
-	    $(ROOT)/dropbear/configure \
+	$(call CHECK_GET_PACKAGE,$(PACKAGE_SERVER),$(PACKAGE_FILENAME))
+	$(call UNPACKE,$(PACKAGE_NAME),$(PACKAGE_FILENAME),1)
+	$(call CHECK_FOLDER,$(OUTPUT_FOLDER))
+	cd $(OUTPUT_FOLDER); \
+	    $(SRC_FOLDER)/configure \
 	        --host=$(CROSS_COMPILE_PREFIX) \
 	        --disable-zlib
 
@@ -23,9 +20,9 @@ mk_dropbear_cpcfg:
 	echo $@
 
 mk_dropbear_install: mk_dropbear_uninstall
-	$(call CHEKC_FOLDER,$(IMAGE)/rootfs)
-	cp -f $(DROPBEAR_OUTPUT)/dropbear $(IMAGE)/rootfs/bin
-	cp -f $(DROPBEAR_OUTPUT)/dropbearkey $(IMAGE)/rootfs/bin
+	$(call CHEKC_FOLDER,$(IMAGE)/rootfs/bin)
+	cp -f $(OUTPUT_FOLDER)/dropbear $(IMAGE)/rootfs/bin
+	cp -f $(OUTPUT_FOLDER)/dropbearkey $(IMAGE)/rootfs/bin
 
 mk_dropbear_uninstall:
 	rm -f $(IMAGE)/rootfs/bin/dropbear

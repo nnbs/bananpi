@@ -1,5 +1,5 @@
-BB_OUTPUT=$(OUTPUT)/busybox
-BB_PARAM=ARCH=arm O=$(BB_OUTPUT) -C $(ROOT)/busybox
+BB_OUTPUT=$(OUTPUT)/Application/busybox
+BB_PARAM=ARCH=arm O=$(BB_OUTPUT) -C $(ROOT)/Application/busybox
 
 mk_busybox_build:
 	$(call USE_CONFIG,busybox,$(BB_OUTPUT)/.config)
